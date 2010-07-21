@@ -1,0 +1,98 @@
+/*
+   dialogbox.css
+   
+   Created by Andrey Okonetchnikov on 2010-07-21.
+   Copyright 2010 wollzelle GmbH (http://wollzelle.com). All rights reserved.
+*/
+
+body.dialogbox {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.dialogbox_overlay {
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 99999;
+	border: 0;
+	background-color: rgba(0,0,0,0.5);	
+}
+.dialogbox_overlay[class] { position: fixed; }
+
+.dialogbox_dialog {
+	position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -300px 0 0 -400px;
+  width: 800px;
+  height: 600px;
+  
+  background-color: #FFF;
+	
+	border: 10px solid rgba(0,0,0,0.75);
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	
+	z-index: 100000;
+	
+	/* Webkit animation initial state */
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -o-transform: scale(0);
+}
+.dialogbox_dialog[class] { position: fixed; }
+
+.dialogbox_dialog_content {
+  display: none !important;
+}
+
+/* Activate / Deactivate */
+.dialogbox_overlay,
+.dialogbox_dialog {
+  opacity: 0;
+  -moz-opacity: 0;
+  visibility: hidden;
+  
+  /* Mobile devices need this */
+  -webkit-transform-style: preserve-3d;
+	
+  -webkit-transition-property: opacity, -webkit-transform;
+  -webkit-transition-duration: .35s;  
+  -webkit-transition-timing-function: cubic-bezier(0.5, 0.3, 0.2, 1);
+  
+  -moz-transition-property: visibility, opacity, -moz-transform;
+  -moz-transition-duration: .35s;  
+  -moz-transition-timing-function: cubic-bezier(0.5, 0.3, 0.2, 1);
+    
+  -o-transition-property: visibility, opacity, -o-transform;
+  -o-transition-duration: .35s;  
+  -o-transition-timing-function: cubic-bezier(0.5, 0.3, 0.2, 1);
+}
+
+body.dialogbox .dialogbox_overlay,
+body.dialogbox .dialogbox_dialog.active {
+  opacity: 1;
+  -moz-opacity: 1;
+  visibility: visible;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -o-transform: scale(1);
+}
+
+/* Close link */
+.dialogbox_close {
+  display: block;
+	position: absolute;
+	right: 5px;
+	top: 4px;
+	padding: 2px 3px;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 13px;
+}
