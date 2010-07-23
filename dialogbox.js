@@ -59,17 +59,28 @@
       return this;
     },
 
-    open: function(el){
-      this.dialog = $(el);    
+    open: function(el, options){
+      // Close any open dialogs before open new one
+      $$('.dialogbox_dialog.active').removeClass('active');
+      
+      
+      
+      this.dialog = $(el);
+      
       this.options = this.dialog.onclick() || {};
+      $extend(this.options, options);
+      
       this.update();
       this.dialog.addClass('active');
+      document.html.addClass('dialogbox');
       document.body.addClass('dialogbox');
       if(typeof this.options.onOpen === 'function') this.options.onOpen();
     },
 
     close: function(options){
+      $extend(this.options, options);
       this.dialog.removeClass('active');
+      document.html.removeClass('dialogbox');
       document.body.removeClass('dialogbox');
       if(typeof this.options.onClose === 'function') this.options.onClose();
       this.options = this.defaultOptions;
